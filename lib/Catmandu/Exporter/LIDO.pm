@@ -60,7 +60,7 @@ Catmandu::Exporter::LIDO - a LIDO exporter
     
 =head1 DESCRIPTION
 
-This is a L<Catmandu::Exporter> for converting Perl into LIDO ZML (an XML Schema for 
+This is a L<Catmandu::Exporter> for converting Perl into LIDO XML (an XML Schema for 
 Contributing Content to Cultural Heritage Repositories).
 
 =head1 SEE ALSO
