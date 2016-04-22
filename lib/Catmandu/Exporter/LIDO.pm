@@ -13,7 +13,7 @@ with 'Catmandu::Exporter';
 has 'lido'      => (is => 'lazy');
 
 sub _build_lido {
-	return Lido::XML->new;
+    return Lido::XML->new;
 }
 
 sub add {

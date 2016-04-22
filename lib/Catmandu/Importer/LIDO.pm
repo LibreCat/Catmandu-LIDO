@@ -14,30 +14,30 @@ with 'Catmandu::Importer';
 has 'lido'      => (is => 'lazy');
 
 sub _build_lido {
-	return Lido::XML->new;
+    return Lido::XML->new;
 }
  
 sub generator {
     my ($self) = @_;
 
     sub {
-    	state $reader = XML::LibXML::Reader->new(IO => $self->file);
+        state $reader = XML::LibXML::Reader->new(IO => $self->file);
 
-    	my $match = $reader->nextPatternMatch(
-			XML::LibXML::Pattern->new( 
-				'//lido:lido', { lido => 'http://www.lido-schema.org' }
-			)
-    	);
+        my $match = $reader->nextPatternMatch(
+            XML::LibXML::Pattern->new( 
+                '//lido:lido', { lido => 'http://www.lido-schema.org' }
+            )
+        );
 
-    	return undef unless $match == 1;
+        return undef unless $match == 1;
 
-    	my $xml = $reader->readOuterXml();
+        my $xml = $reader->readOuterXml();
 
-    	return undef unless length $xml;
+        return undef unless length $xml;
 
-		$reader->nextSibling();
+        $reader->nextSibling();
 
-    	return $self->lido->parse($xml);
+        return $self->lido->parse($xml);
     };
 }
 
@@ -53,10 +53,10 @@ Catmandu::Importer::LIDO - A LIDO XML importer
 
 =head1 SYNOPSIS
 
-	# From the command line
-	$ catmandu convert LIDO to YAML < ex/lido.xml
+    # From the command line
+    $ catmandu convert LIDO to YAML < ex/lido.xml
 
-	# From Perl
+    # From Perl
     use Catmandu;
 
     my $importer = Catmandu->importer('LIDO',file => 'ex/lido.xml');
