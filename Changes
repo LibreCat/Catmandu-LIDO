@@ -1,6 +1,8 @@
 Changelog for Catmandu-LIDO
 
 {{$NEXT}}
+
+0.03  2016-04-23 16:38:52 CEST
    - missing required dependency version
    
 0.02  2016-04-23 13:05:36 CEST

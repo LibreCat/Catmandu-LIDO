@@ -4,7 +4,7 @@ use Catmandu::Sane;
 use Lido::XML;
 use XML::LibXML::Reader;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Moo;
 use namespace::clean;
