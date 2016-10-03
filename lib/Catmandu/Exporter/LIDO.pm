@@ -18,7 +18,7 @@ sub _build_lido {
 
 sub add {
     my ($self, $data) = @_;
-    
+
     use Data::Dumper;
 
     $self->fh->print($self->lido->to_xml($data));
@@ -57,14 +57,14 @@ Catmandu::Exporter::LIDO - a LIDO exporter
 
     # Get an array ref of all records exported
     my $data = $exporter->as_arrayref;
-    
+
 =head1 DESCRIPTION
 
-This is a L<Catmandu::Exporter> for converting Perl into LIDO XML (an XML Schema for 
+This is a L<Catmandu::Exporter> for converting Perl into LIDO XML (an XML Schema for
 Contributing Content to Cultural Heritage Repositories).
 
 =head1 SEE ALSO
 
-L<Catmandu::Importer::LDO>, L<Lido::XML>
+L<Catmandu::Importer::LIDO>, L<Lido::XML>
 
 =cut
