@@ -7,7 +7,6 @@ our $VERSION = '0.03';
 use Moo;
 use Lido::XML;
 
-
 with 'Catmandu::Exporter';
 
 has 'lido'      => (is => 'lazy');
@@ -18,8 +17,6 @@ sub _build_lido {
 
 sub add {
     my ($self, $data) = @_;
-
-    use Data::Dumper;
 
     $self->fh->print($self->lido->to_xml($data));
 }
