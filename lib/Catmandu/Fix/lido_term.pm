@@ -8,6 +8,8 @@ use Data::Dumper qw(Dumper);
 
 use strict;
 
+our $VERSION = '0.03';
+
 with 'Catmandu::Fix::Base';
 
 has path      => ( fix_arg => 1);
@@ -24,7 +26,7 @@ sub emit {
  #   print Dumper $fixer;
 
     my $perl = '';
-    
+
     $perl .= emit_term($fixer, $fixer->var, $self->path, $self->term, $self->conceptid,
     $self->lang, $self->pref, $self->source, $self->type);
 

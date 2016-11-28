@@ -8,6 +8,8 @@ use Catmandu::Fix::LIDO::Nameset qw(emit_nameset);
 
 use strict;
 
+our $VERSION = '0.03';
+
 #https://librecatproject.wordpress.com/2014/03/26/create-a-fixer-part-2/
 
 use Data::Dumper qw(Dumper);
@@ -26,7 +28,7 @@ sub emit {
 
     my $perl = '';
 
-#$fixer, $path, $appellation_value, $appellation_value_lang, 
+#$fixer, $path, $appellation_value, $appellation_value_lang,
 #$appellation_value_type, $appellation_value_pref, $source_appellation, $source_appellation_lang
     $perl .= emit_nameset($fixer, $fixer->var, $self->path, $self->value, $self->value_lang, undef, $self->value_pref,
     $self->source, $self->source_lang);

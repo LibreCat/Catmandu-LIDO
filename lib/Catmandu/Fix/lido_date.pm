@@ -9,6 +9,8 @@ use Data::Dumper qw(Dumper);
 
 use strict;
 
+our $VERSION = '0.03';
+
 with 'Catmandu::Fix::Base';
 
 has path => (fix_arg => 1);
@@ -43,7 +45,7 @@ sub emit {
             return $r_code;
         }
     );
-    
+
     return $perl;
 }
 

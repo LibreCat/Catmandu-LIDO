@@ -11,6 +11,8 @@ use Data::Dumper qw(Dumper);
 
 use strict;
 
+our $VERSION = '0.03';
+
 with 'Catmandu::Fix::Base';
 
 has path => (fix_arg => 1);
@@ -91,14 +93,14 @@ sub emit {
             if (defined($self->role)) {
                 $r_code .= emit_term($fixer, $r_root, 'actorInRole.roleActor', $self->role, $self->role_id, undef, undef, $self->role_id_source, $self->role_id_type);
             }
-            
+
             ##
             # attributionQualifierActor
             # $fixer, $root, $path, $value, $lang, $pref, $label, $type
             if (defined($self->qualifier)) {
                 $r_code .= emit_base_value($fixer, $r_root, 'actorInRole.attributionQualifierActor', $self->qualifier);
             }
-            
+
             return $r_code;
         }
     );

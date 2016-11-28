@@ -8,6 +8,8 @@ use Catmandu::Fix::LIDO::Value qw(emit_base_value);
 
 use strict;
 
+our $VERSION = '0.03';
+
 #https://librecatproject.wordpress.com/2014/03/26/create-a-fixer-part-2/
 
 use Data::Dumper qw(Dumper);

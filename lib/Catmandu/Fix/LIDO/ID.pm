@@ -2,6 +2,8 @@ package Catmandu::Fix::LIDO::ID;
 
 use strict;
 
+our $VERSION = '0.03';
+
 use Exporter qw(import);
 use Data::Dumper qw(Dumper);
 
@@ -59,7 +61,7 @@ sub emit_base_id {
 			$r_code .= "'_' => ${f_id}";
 
 			$r_code .= "};";
-			
+
 			return $r_code;
 		}
 	);

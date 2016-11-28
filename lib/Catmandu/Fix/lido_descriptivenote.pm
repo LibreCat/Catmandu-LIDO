@@ -8,6 +8,8 @@ use Catmandu::Fix::LIDO::DescriptiveNote qw(emit_descriptive_note);
 
 use strict;
 
+our $VERSION = '0.03';
+
 #https://librecatproject.wordpress.com/2014/03/26/create-a-fixer-part-2/
 
 use Data::Dumper qw(Dumper);

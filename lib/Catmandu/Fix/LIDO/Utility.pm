@@ -2,6 +2,8 @@ package Catmandu::Fix::LIDO::Utility;
 
 use strict;
 
+our $VERSION = '0.03';
+
 use Data::Dumper qw(Dumper);
 
 use Exporter qw(import);
@@ -76,7 +78,7 @@ sub walk {
 	my ($fixer, $path, $key, $h) = @_;
 
 	my $perl = '';
-	
+
 	$perl .= $fixer->emit_walk_path(
 		$fixer->var,
 		$path,
@@ -92,7 +94,7 @@ sub walk {
 			);
 		}
 	);
-	
+
 	return $perl;
 }
 

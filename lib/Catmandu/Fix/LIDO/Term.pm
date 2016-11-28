@@ -4,6 +4,8 @@ use Catmandu::Fix::LIDO::Utility qw(walk declare_source split_path);
 
 use strict;
 
+our $VERSION = '0.03';
+
 use Exporter qw(import);
 
 our @EXPORT_OK = qw(emit_term);
@@ -112,7 +114,7 @@ sub emit_term {
                         $c_code .= "'_' => ${f_conceptid}";
 
                         $c_code .= "};";
-                        
+
                         return $c_code;
                     }
                 );
@@ -147,7 +149,7 @@ Catmandu::Fix::LIDO::Term::emit_term
         $pref, # pref attribute, string.
         $source, # source attribute, string.
         $type # type attribute, string.
-        
+
     )
 
 =head1 DESCRIPTION

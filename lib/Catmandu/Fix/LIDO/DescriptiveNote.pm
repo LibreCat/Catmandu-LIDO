@@ -5,6 +5,8 @@ use Catmandu::Fix::LIDO::Value qw(emit_base_value);
 
 use strict;
 
+our $VERSION = '0.03';
+
 use Exporter qw(import);
 
 our @EXPORT_OK = qw(emit_descriptive_note);

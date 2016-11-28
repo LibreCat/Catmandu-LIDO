@@ -8,6 +8,8 @@ use Catmandu::Fix::LIDO::Value qw(emit_base_value);
 
 use strict;
 
+our $VERSION = '0.03';
+
 #https://librecatproject.wordpress.com/2014/03/26/create-a-fixer-part-2/
 
 use Data::Dumper qw(Dumper);
@@ -36,7 +38,7 @@ sub emit {
             if (defined($self->extent)) {
                 $r_code .= emit_base_value($fixer, $r_root, 'extentMeasurements', $self->extent, undef, undef, undef, undef, 1);
             }
-            
+
             ##
             # type, unit, value
             $r_code .= $fixer->emit_create_path (
