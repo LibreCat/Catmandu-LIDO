@@ -11,7 +11,7 @@ use Catmandu::Fix::LIDO::Term qw(emit_term);
 
 use strict;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 #https://librecatproject.wordpress.com/2014/03/26/create-a-fixer-part-2/
 
