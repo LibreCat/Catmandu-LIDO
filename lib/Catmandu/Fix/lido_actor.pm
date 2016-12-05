@@ -20,6 +20,7 @@ has id => (fix_arg => 1);
 has name => (fix_arg => 1);
 has id_label => (fix_opt => 1);
 has id_source => (fix_opt => 1);
+has id_type => (fix_opt => 1);
 has nationality => (fix_opt => 1); # Path
 has birthdate => (fix_opt => 1);
 has deathdate => (fix_opt => 1);
@@ -45,7 +46,7 @@ sub emit {
             # actorID
             # $fixer, $root, $path, $id, $source, $label, $type
             if (defined($self->id)) {
-                $r_code .= emit_base_id($fixer, $r_root, 'actorInRole.actor.actorID', $self->id, $self->id_source, $self->id_label, undef);
+                $r_code .= emit_base_id($fixer, $r_root, 'actorInRole.actor.actorID', $self->id, $self->id_source, $self->id_label, $self->id_type);
             }
 
             ##

@@ -34,6 +34,8 @@ To use the block fixes, you must provide the path where they should appear.
 
 Note that all parameters prefixed by `-` are optional.
 
+Also take note that `descriptiveMetadata` and `administrativeMetadata` must have a `lang` attribute you must set yourself (e.g. via `add_field`), otherwise your LIDO records will not be valid.
+
 ## Block fixes
 
 ### `lido_baseid`
