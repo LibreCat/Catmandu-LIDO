@@ -181,6 +181,8 @@ All other optional parameters are strings:
 
 =item C<id_source>
 
+=item C<id_type> (Required if id is set.)
+
 =item C<role_id_type>
 
 =item C<role_id_source>
@@ -196,6 +198,7 @@ All other optional parameters are strings:
         recordList.record.creator.id,
         recordList.record.creator.name,
         -id_label: 'priref',
+        -id_type: 'local',
         -nationality: recordList.record.creator.nationality,
         -birthdate: recordList.record.creator.date_of_birth,
         -deathdate: recordList.record.creator.date_of_death,
@@ -214,7 +217,7 @@ All other optional parameters are strings:
                     <lido:eventActor>
                         <lido:actorInRole>
                             <lido:actor>
-                                <lido:actorID lido:label="priref">123</lido:actorID>
+                                <lido:actorID lido:label="priref" lido:type="local">123</lido:actorID>
                                 <lido:nameActorSet>
                                     <lido:appellationValue>Jonghe, Jan Baptiste De</lido:appellationValue>
                                 </lido:nameActorSet>

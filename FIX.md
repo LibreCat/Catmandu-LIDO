@@ -184,6 +184,7 @@ Create a `actorInRole` node. You must provide the path where it has to appear (e
         name, # nameActorSet, as path.
         -id_label: actorID.label, # String.
         -id_source: actorID.source, # String.
+        -id_type: actorID.type, # String, required if id is set
         -nationality: nationalityActor, # As path.
         -birthdate: vitalDatesActor.earliestDate, # As path.
         -deathdate: vitalDatesActor.latestDate, # As path.
