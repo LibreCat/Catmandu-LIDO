@@ -8,7 +8,7 @@ use Catmandu::Fix::LIDO::DescriptiveNote qw(emit_descriptive_note);
 
 use strict;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 #https://librecatproject.wordpress.com/2014/03/26/create-a-fixer-part-2/
 

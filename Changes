@@ -2,6 +2,8 @@ Changelog for Catmandu-LIDO
 
 {{$NEXT}}
 
+0.05  2016-12-05 15:43:45 CET
+
   - added id_type to lido_actor
   - convert unit and type to paths in lido_objectmeasurements
   - make lido_objectmeasurements repeatable
