@@ -160,13 +160,13 @@ Generate a `inscriptions` block at `descriptiveMetadata.objectIdentificationWrap
 
 ### `lido_objectmeasurements`
 
-Create an `objectMeasurements` in `descriptiveMetadata.objectIdentificationWrap.objectMeasurementsWrap.objectMeasurementsSet`. Provides `extentMeasurements`, `measurementType`, `measurementUnit` and `measurementValue`.
+Create an `objectMeasurements` in `descriptiveMetadata.objectIdentificationWrap.objectMeasurementsWrap.objectMeasurementsSet`. Provides `extentMeasurements`, `measurementType`, `measurementUnit` and `measurementValue`. Repeatable.
 
 ```
     lido_objectmeasurements(
         extent, # String.
-        type, # String.
-        unit, # String.
+        type, # Path.
+        unit, # Path.
         value # Path.
     )
 ```

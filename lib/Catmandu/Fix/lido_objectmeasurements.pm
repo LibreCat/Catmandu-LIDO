@@ -52,13 +52,13 @@ sub emit {
                     # type
                     if (defined($self->type)) {
                         #$fixer, $root, $path, $value, $lang, $pref, $label, $type, $is_string
-                        $m_code .= emit_base_value($fixer, $m_root, 'measurementType', $self->type, undef, undef, undef, undef, 1);
+                        $m_code .= emit_base_value($fixer, $m_root, 'measurementType', $self->type, undef, undef, undef, undef, 0);
                     }
 
                     ##
                     # unit
                     if (defined($self->unit)) {
-                        $m_code .= emit_base_value($fixer, $m_root, 'measurementUnit', $self->unit, undef, undef, undef, undef, 1);
+                        $m_code .= emit_base_value($fixer, $m_root, 'measurementUnit', $self->unit, undef, undef, undef, undef, 0);
                     }
 
                     ##
@@ -121,21 +121,21 @@ Create a C<objectMeasurements> node, consisting of C<measurementType>, C<measure
 
 All parameters are required.
 
-C<value> is a path parameter, all other parameters are strings.
+C<value>, C<type> and C<unit> are path parameters, all other parameters are strings.
 
 =over
 
 =item C<value>
+
+=item C<type>
+
+=item C<unit>
 
 =back
 
 =over
 
 =item C<extent>
-
-=item C<type>
-
-=item C<unit>
 
 =back
 
@@ -145,8 +145,8 @@ C<value> is a path parameter, all other parameters are strings.
 
     lido_objectmeasurements(
         'hoogte',
-        'hoogte',
-        'cm',
+        recordList.record.height.type,
+        recordList.record.height.unit,
         recordList.record.height
     )
 
