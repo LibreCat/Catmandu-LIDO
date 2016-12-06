@@ -24,7 +24,7 @@ sub parse {
     my $perl = { error => 1 };
 
     eval {
-        $perl    = $self->lido->parse($xml);
+        $perl = $self->lido->parse($xml);
     };
     if ($@) {
         $perl = { error => $@ };

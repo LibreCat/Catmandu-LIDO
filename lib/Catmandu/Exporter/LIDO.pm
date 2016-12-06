@@ -5,6 +5,7 @@ use Catmandu::Sane;
 our $VERSION = '0.05';
 
 use Moo;
+use Encode;
 use Lido::XML;
 
 with 'Catmandu::Exporter';
@@ -18,9 +19,13 @@ sub _build_lido {
 sub add {
     my ($self, $data) = @_;
 
-    $self->fh->print($self->lido->to_xml($data));
+    my $xml = $self->lido->to_xml($data);
+    $self->fh->print(decode('UTF-8', $xml, Encode::FB_CROAK));
 }
 
+sub commit {
+    1;
+}
 
 1;
 
