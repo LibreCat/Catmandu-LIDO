@@ -8,3 +8,6 @@ on 'test', sub {
 requires 'Catmandu','0';
 requires 'Lido::XML','0';
 requires 'XML::LibXML','0';
+requires 'Moo';
+requires 'String::Util';
+requires 'namespace::clean';
