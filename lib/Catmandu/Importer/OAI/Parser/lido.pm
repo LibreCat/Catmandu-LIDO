@@ -36,3 +36,27 @@ sub parse {
 }
 
 1;
+
+__END__
+
+=encoding utf8
+
+=head1 NAME
+
+Catmandu::Importer::OAI::Parser::lido - A Lido XML OAI-PMH handler
+
+=head1 SYNOPSIS
+
+Command line client C<catmandu>:
+
+  catmandu convert OAI \
+    --url http://collections.britishart.yale.edu/oaicatmuseum/OAIHandler \
+    --metadataPrefix lido \
+    --handler lido to YAML \
+
+
+=head1 SEE ALSO
+
+L<Catmandu::OAI>
+
+=cut
