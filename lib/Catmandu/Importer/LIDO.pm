@@ -16,7 +16,7 @@ has 'lido'      => (is => 'lazy');
 sub _build_lido {
     return Lido::XML->new;
 }
- 
+
 sub generator {
     my ($self) = @_;
 
@@ -24,7 +24,7 @@ sub generator {
         state $reader = XML::LibXML::Reader->new(IO => $self->file);
 
         my $match = $reader->nextPatternMatch(
-            XML::LibXML::Pattern->new( 
+            XML::LibXML::Pattern->new(
                 '//lido:lido', { lido => 'http://www.lido-schema.org' }
             )
         );
@@ -49,7 +49,7 @@ __END__
 
 =head1 NAME
 
-Catmandu::Importer::LIDO - A LIDO XML importer 
+Catmandu::Importer::LIDO - A LIDO XML importer
 
 =head1 SYNOPSIS
 
@@ -68,7 +68,7 @@ Catmandu::Importer::LIDO - A LIDO XML importer
 
 =head1 DESCRIPTION
 
-This is a L<Catmandu::Importer> for converting LIDO data (an XML Schema for 
+This is a L<Catmandu::Importer> for converting LIDO data (an XML Schema for
 Contributing Content to Cultural Heritage Repositories).
 
 =head1 CONFIGURATION
