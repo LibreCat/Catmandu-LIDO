@@ -18,6 +18,8 @@ with 'Catmandu::Fix::Base';
 has path => (fix_arg => 1);
 has id => (fix_arg => 1);
 has name => (fix_arg => 1);
+has name_lang => (fix_opt => 1);
+has name_pref => (fix_opt => 1);
 has id_label => (fix_opt => 1);
 has id_source => (fix_opt => 1);
 has id_type => (fix_opt => 1);
@@ -64,7 +66,7 @@ sub emit {
                     # $fixer, $root, $path, $appellation_value, $appellation_value_lang, $appellation_value_type,
                     # $appellation_value_pref, $source_appellation, $source_appellation_lang
                     if (defined($self->name)) {
-                        $r_code .= emit_nameset($fixer, $r_root, join('.', @{$paths->{'name'}}), $self->name);
+                        $r_code .= emit_nameset($fixer, $r_root, join('.', @{$paths->{'name'}}), $self->name, $self->name_lang, undef, $self->name_pref);
                     }
 
                     ##
