@@ -31,6 +31,25 @@ sub emit_nameset {
 
     my $new_path = $fixer->split_path($path);
 
+
+    my $last = pop @$new_path;
+
+    my $value_path = ['appellationValue'];
+    my $source_path = ['sourceAppellation'];
+
+    ##
+    # Bug #4
+    if ($last eq '$append' || $last eq '$prepend' || $last eq '$last' || $last eq '$first') {
+        unshift @$value_path, $last;
+        if ($last eq '$prepend' || $last eq '$first') {
+            unshift @$source_path, '$first';
+        } else {
+            unshift @$source_path, '$last';
+        }
+    } else {
+        push @$new_path, $last;
+    }
+
     my $f_av = $fixer->generate_var();
     my $f_sa = $fixer->generate_var();
     my $a_root = $fixer->var;
@@ -62,14 +81,14 @@ sub emit_nameset {
             ##
             # appellationValue
             if (defined($appellation_value)) {
-                $r_code .= emit_base_value($fixer, $r_root, 'appellationValue', $appellation_value,
+                $r_code .= emit_base_value($fixer, $r_root, join('.', @$value_path), $appellation_value,
                 $appellation_value_lang, $appellation_value_pref, undef, $appellation_value_type);
             }
 
             ##
             # sourceAppellation
             if (defined ($source_appellation)) {
-                $r_code .= emit_base_value($fixer, $r_root, 'sourceAppellation', $source_appellation,
+                $r_code .= emit_base_value($fixer, $r_root, join('.', @$source_path), $source_appellation,
                 $appellation_value_lang);
             }
 

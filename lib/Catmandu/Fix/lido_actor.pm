@@ -35,74 +35,84 @@ sub emit {
     my $perl = '';
     my $new_path = $fixer->split_path($self->path);
 
+    my $paths = {};
+    $paths->{'id'} = ['actor', 'actorID'];
+    $paths->{'name'} = ['actor', 'nameActorSet'];
+    $paths->{'nationality'} = ['actor', 'nationalityActor'];
+    $paths->{'dates'} = ['actor', 'vitalDatesActor'];
+    $paths->{'role'} = ['roleActor'];
+    $paths->{'attribution'} = ['attributionQualifierActor'];
+
+    push @$new_path, 'actorInRole';
+
     $perl .= $fixer->emit_create_path(
         $fixer->var,
         $new_path,
-        sub {
-            my $r_root = shift;
-            my $r_code = '';
-
-            ##
-            # actorID
-            # $fixer, $root, $path, $id, $source, $label, $type
-            if (defined($self->id)) {
-                $r_code .= emit_base_id($fixer, $r_root, 'actorInRole.actor.actorID', $self->id, $self->id_source, $self->id_label, $self->id_type);
-            }
-
-            ##
-            # nameActorSet
-            # $fixer, $root, $path, $appellation_value, $appellation_value_lang, $appellation_value_type,
-            # $appellation_value_pref, $source_appellation, $source_appellation_lang
-            if (defined($self->name)) {
-                $r_code .= emit_nameset($fixer, $r_root, 'actorInRole.actor.nameActorSet', $self->name);
-            }
-
-            ##
-            # nationalityActor
-            # $fixer, $root, $path, $term, $conceptid, $lang, $pref, $source, $type
-            if (defined($self->nationality)) {
-                $r_code .= emit_term($fixer, $r_root, 'actorInRole.actor.nationalityActor', $self->nationality);
-            }
-
-            ##
-            # vitalDatesActor
-            $r_code .= $fixer->emit_create_path(
-                $r_root,
-                ['actorInRole', 'actor', 'vitalDatesActor'],
                 sub {
-                    my $d_root = shift;
-                    my $d_code = '';
+                    my $r_root = shift;
+                    my $r_code = '';
 
                     ##
-                    # earliestDate
-                    if (defined($self->birthdate)) {
-                        $d_code .= emit_simple_value($fixer, $d_root, 'earliestDate', $self->birthdate);
+                    # actorID
+                    # $fixer, $root, $path, $id, $source, $label, $type
+                    if (defined($self->id)) {
+                        $r_code .= emit_base_id($fixer, $r_root, join('.', @{$paths->{'id'}}), $self->id, $self->id_source, $self->id_label, $self->id_type);
                     }
 
                     ##
-                    # latestDate
-                    if (defined($self->deathdate)) {
-                        $d_code .= emit_simple_value($fixer, $d_root, 'latestDate', $self->deathdate);
+                    # nameActorSet
+                    # $fixer, $root, $path, $appellation_value, $appellation_value_lang, $appellation_value_type,
+                    # $appellation_value_pref, $source_appellation, $source_appellation_lang
+                    if (defined($self->name)) {
+                        $r_code .= emit_nameset($fixer, $r_root, join('.', @{$paths->{'name'}}), $self->name);
                     }
 
-                    return $d_code;
-                }
-            );
+                    ##
+                    # nationalityActor
+                    # $fixer, $root, $path, $term, $conceptid, $lang, $pref, $source, $type
+                    if (defined($self->nationality)) {
+                        $r_code .= emit_term($fixer, $r_root, join('.', @{$paths->{'nationality'}}), $self->nationality);
+                    }
 
-            ##
-            # roleActor
-            if (defined($self->role)) {
-                $r_code .= emit_term($fixer, $r_root, 'actorInRole.roleActor', $self->role, $self->role_id, undef, undef, $self->role_id_source, $self->role_id_type);
-            }
+                    ##
+                    # vitalDatesActor
+                    $r_code .= $fixer->emit_create_path(
+                        $r_root,
+                        $paths->{'dates'},
+                        sub {
+                            my $d_root = shift;
+                            my $d_code = '';
 
-            ##
-            # attributionQualifierActor
-            # $fixer, $root, $path, $value, $lang, $pref, $label, $type
-            if (defined($self->qualifier)) {
-                $r_code .= emit_base_value($fixer, $r_root, 'actorInRole.attributionQualifierActor', $self->qualifier);
-            }
+                            ##
+                            # earliestDate
+                            if (defined($self->birthdate)) {
+                                $d_code .= emit_simple_value($fixer, $d_root, 'earliestDate', $self->birthdate);
+                            }
 
-            return $r_code;
+                            ##
+                            # latestDate
+                            if (defined($self->deathdate)) {
+                                $d_code .= emit_simple_value($fixer, $d_root, 'latestDate', $self->deathdate);
+                            }
+
+                            return $d_code;
+                        }
+                    );
+
+                    ##
+                    # roleActor
+                    if (defined($self->role)) {
+                        $r_code .= emit_term($fixer, $r_root, join('.', @{$paths->{'role'}}), $self->role, $self->role_id, undef, undef, $self->role_id_source, $self->role_id_type);
+                    }
+
+                    ##
+                    # attributionQualifierActor
+                    # $fixer, $root, $path, $value, $lang, $pref, $label, $type
+                    if (defined($self->qualifier)) {
+                        $r_code .= emit_base_value($fixer, $r_root, join('.', @{$paths->{'attribution'}}), $self->qualifier);
+                    }
+
+                    return $r_code;
         }
     );
 

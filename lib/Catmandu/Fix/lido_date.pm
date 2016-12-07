@@ -4,7 +4,7 @@ use Catmandu::Sane;
 use Moo;
 use Catmandu::Fix::Has;
 use Catmandu::Fix::LIDO::Value qw(emit_base_value emit_simple_value);
-use Catmandu::Fix::LIDO::Utility qw(declare_source);
+use Catmandu::Fix::LIDO::Utility qw(declare_source split_path);
 use Data::Dumper qw(Dumper);
 
 use strict;
@@ -20,7 +20,25 @@ has latest_date => (fix_opt => 1);
 sub emit {
     my ($self, $fixer) = @_;
     my $perl = '';
-    my $new_path = $fixer->split_path($self->path);
+    my $new_path = split_path($self->path);
+
+    my $last = pop @$new_path;
+
+    my $earliest_path = ['earliestDate'];
+    my $latest_path = ['latestDate'];
+
+    ##
+    # Bug #4
+    if ($last eq '$append' || $last eq '$prepend' || $last eq '$last' || $last eq '$first') {
+        unshift @$earliest_path, $last;
+        if ($last eq '$prepend' || $last eq '$first') {
+            unshift @$latest_path, '$first';
+        } else {
+            unshift @$latest_path, '$last';
+        }
+    } else {
+        push @$new_path, $last;
+    }
 
     $perl .= $fixer->emit_create_path(
         $fixer->var,
@@ -33,13 +51,13 @@ sub emit {
             # earliestDate
             # $fixer, $root, $path, $value, $lang, $pref, $label, $type, $is_string
             if (defined($self->earliest_date)) {
-                $r_code .= emit_simple_value($fixer, $r_root, 'earliestDate', $self->earliest_date);
+                $r_code .= emit_simple_value($fixer, $r_root, join('.', @$earliest_path), $self->earliest_date);
             }
 
             ##
             # latestDate
             if (defined($self->latest_date)) {
-                $r_code .= emit_simple_value($fixer, $r_root, 'latestDate', $self->latest_date);
+                $r_code .= emit_simple_value($fixer, $r_root, join('.', @$latest_path), $self->latest_date);
             }
 
             return $r_code;
