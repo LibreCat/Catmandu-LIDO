@@ -18,14 +18,16 @@ our $VERSION = '0.06';
 with 'Catmandu::Fix::Base';
 
 has object_work_type        => (fix_arg => 1);
-has classification          => (fix_arg => 1);
 has object_work_type_id     => (fix_opt => 1);
-has classification_id       => (fix_opt => 1);
+has object_work_type_lang   => (fix_opt => 1);
 has object_work_type_type   => (fix_opt => 1);
 has object_work_type_source => (fix_opt => 1);
+has classification_id       => (fix_opt => 1);
+has classification_lang     => (fix_opt => 1);
 has classification_type     => (fix_opt => 1);
 has classification_source   => (fix_opt => 1);
-has lang                    => (fix_opt => 1);
+has classification          => (fix_arg => 1);
+
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -44,16 +46,16 @@ sub emit {
             # classification
             if (defined($self->classification)) {
                 $r_code .= emit_term($fixer, $r_root, 'classificationWrap.classification.$append',
-                            $self->classification, $self->classification_id, $self->lang, 'preferred', $self->classification_source,
-                            $self->classification_type);
+                            $self->classification, $self->classification_id, $self->classification_lang, 'preferred',
+                            $self->classification_source, $self->classification_type);
             }
 
             ##
             # objectWorkType
             if (defined($self->object_work_type)) {
                 $r_code .= emit_term($fixer, $r_root, 'objectWorkTypeWrap.objectWorkType.$append',
-                            $self->object_work_type, $self->object_work_type_id, $self->lang, undef, $self->object_work_type_source,
-                            $self->object_work_type_type);
+                            $self->object_work_type, $self->object_work_type_id, $self->object_work_type_lang, undef,
+                            $self->object_work_type_source, $self->object_work_type_type);
             }
 
             return $r_code;
