@@ -11,7 +11,7 @@ use Data::Dumper qw(Dumper);
 
 use strict;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 with 'Catmandu::Fix::Base';
 

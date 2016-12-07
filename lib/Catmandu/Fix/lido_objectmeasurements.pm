@@ -8,7 +8,7 @@ use Catmandu::Fix::LIDO::Value qw(emit_base_value);
 
 use strict;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 #https://librecatproject.wordpress.com/2014/03/26/create-a-fixer-part-2/
 
