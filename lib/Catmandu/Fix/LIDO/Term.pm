@@ -36,6 +36,30 @@ sub emit_term {
     my $code = '';
 
     my $new_path = split_path($path);
+
+    my $last = pop @$new_path;
+
+    my $term_path = ['term', '$append'];
+    my $concept_id_path = ['conceptID', '$append'];
+
+    ##
+    # If the path ends in $append or $prepend, the path creater will
+    # evaluate them twice, once for term and once for conceptID. This
+    # will split them in two separate instances of their parent component
+    # (see bug #4). We don't want that. This trickery creates the array
+    # just once, with term, and uses $last/$first to append the conceptID
+    # where it belongs. 
+    if ($last eq '$append' || $last eq '$prepend' || $last eq '$last' || $last eq '$first') {
+        unshift @$term_path, $last;
+        if ($last eq '$prepend' || $last eq '$first') {
+            unshift @$concept_id_path, '$first';
+        } else {
+            unshift @$concept_id_path, '$last';
+        }
+    } else {
+        push @$new_path, $last;
+    }
+
     ##
     # term
     my $f_term = $fixer->generate_var();
@@ -60,7 +84,7 @@ sub emit_term {
 
             $p_code .= $fixer->emit_create_path(
                         $p_root,
-                        ['term', '$append'],
+                        $term_path,
                         sub {
                             my $term_root = shift;
                             my $term_code = '';
@@ -92,7 +116,7 @@ sub emit_term {
                 # Create the conceptID for Lido::XML
                 $p_code .= $fixer->emit_create_path(
                     $p_root,
-                    ['conceptID', '$append'],
+                    $concept_id_path,
                     sub {
                         my $concept_root = shift;
                         my $c_code = '';

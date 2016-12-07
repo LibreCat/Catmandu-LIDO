@@ -35,74 +35,95 @@ sub emit {
     my $perl = '';
     my $new_path = $fixer->split_path($self->path);
 
+    my $last = pop @$new_path;
+
+    ##
+    # If the path ends in $append or $prepend, the path creater will
+    # evaluate them twice, once for term and once for conceptID. This
+    # will split them in two separate instances of their parent component
+    # (see bug #4). We don't want that. This trickery creates the array
+    # just once, with term, and uses $last/$first to append the conceptID
+    # where it belongs. 
+
     $perl .= $fixer->emit_create_path(
         $fixer->var,
         $new_path,
         sub {
-            my $r_root = shift;
-            my $r_code = '';
+            my $l_root = shift;
+            my $l_code = '';
 
-            ##
-            # actorID
-            # $fixer, $root, $path, $id, $source, $label, $type
-            if (defined($self->id)) {
-                $r_code .= emit_base_id($fixer, $r_root, 'actorInRole.actor.actorID', $self->id, $self->id_source, $self->id_label, $self->id_type);
-            }
-
-            ##
-            # nameActorSet
-            # $fixer, $root, $path, $appellation_value, $appellation_value_lang, $appellation_value_type,
-            # $appellation_value_pref, $source_appellation, $source_appellation_lang
-            if (defined($self->name)) {
-                $r_code .= emit_nameset($fixer, $r_root, 'actorInRole.actor.nameActorSet', $self->name);
-            }
-
-            ##
-            # nationalityActor
-            # $fixer, $root, $path, $term, $conceptid, $lang, $pref, $source, $type
-            if (defined($self->nationality)) {
-                $r_code .= emit_term($fixer, $r_root, 'actorInRole.actor.nationalityActor', $self->nationality);
-            }
-
-            ##
-            # vitalDatesActor
-            $r_code .= $fixer->emit_create_path(
-                $r_root,
-                ['actorInRole', 'actor', 'vitalDatesActor'],
+            $l_code .= $fixer->emit_create_path(
+                $l_root,
+                [$last],
                 sub {
-                    my $d_root = shift;
-                    my $d_code = '';
+                    my $r_root = shift;
+                    my $r_code = '';
 
                     ##
-                    # earliestDate
-                    if (defined($self->birthdate)) {
-                        $d_code .= emit_simple_value($fixer, $d_root, 'earliestDate', $self->birthdate);
+                    # actorID
+                    # $fixer, $root, $path, $id, $source, $label, $type
+                    if (defined($self->id)) {
+                        $r_code .= emit_base_id($fixer, $r_root, 'actorInRole.actor.actorID', $self->id, $self->id_source, $self->id_label, $self->id_type);
                     }
 
                     ##
-                    # latestDate
-                    if (defined($self->deathdate)) {
-                        $d_code .= emit_simple_value($fixer, $d_root, 'latestDate', $self->deathdate);
+                    # nameActorSet
+                    # $fixer, $root, $path, $appellation_value, $appellation_value_lang, $appellation_value_type,
+                    # $appellation_value_pref, $source_appellation, $source_appellation_lang
+                    if (defined($self->name)) {
+                        $r_code .= emit_nameset($fixer, $r_root, 'actorInRole.actor.nameActorSet', $self->name);
                     }
 
-                    return $d_code;
+                    ##
+                    # nationalityActor
+                    # $fixer, $root, $path, $term, $conceptid, $lang, $pref, $source, $type
+                    if (defined($self->nationality)) {
+                        $r_code .= emit_term($fixer, $r_root, 'actorInRole.actor.nationalityActor', $self->nationality);
+                    }
+
+                    ##
+                    # vitalDatesActor
+                    $r_code .= $fixer->emit_create_path(
+                        $r_root,
+                        ['actorInRole', 'actor', 'vitalDatesActor'],
+                        sub {
+                            my $d_root = shift;
+                            my $d_code = '';
+
+                            ##
+                            # earliestDate
+                            if (defined($self->birthdate)) {
+                                $d_code .= emit_simple_value($fixer, $d_root, 'earliestDate', $self->birthdate);
+                            }
+
+                            ##
+                            # latestDate
+                            if (defined($self->deathdate)) {
+                                $d_code .= emit_simple_value($fixer, $d_root, 'latestDate', $self->deathdate);
+                            }
+
+                            return $d_code;
+                        }
+                    );
+
+                    ##
+                    # roleActor
+                    if (defined($self->role)) {
+                        $r_code .= emit_term($fixer, $r_root, 'actorInRole.roleActor', $self->role, $self->role_id, undef, undef, $self->role_id_source, $self->role_id_type);
+                    }
+
+                    ##
+                    # attributionQualifierActor
+                    # $fixer, $root, $path, $value, $lang, $pref, $label, $type
+                    if (defined($self->qualifier)) {
+                        $r_code .= emit_base_value($fixer, $r_root, 'actorInRole.attributionQualifierActor', $self->qualifier);
+                    }
+
+                    return $r_code;
                 }
             );
 
-            ##
-            # roleActor
-            if (defined($self->role)) {
-                $r_code .= emit_term($fixer, $r_root, 'actorInRole.roleActor', $self->role, $self->role_id, undef, undef, $self->role_id_source, $self->role_id_type);
-            }
-
-            ##
-            # attributionQualifierActor
-            # $fixer, $root, $path, $value, $lang, $pref, $label, $type
-            if (defined($self->qualifier)) {
-                $r_code .= emit_base_value($fixer, $r_root, 'actorInRole.attributionQualifierActor', $self->qualifier);
-            }
-
-            return $r_code;
+            return $l_code;
         }
     );
 
