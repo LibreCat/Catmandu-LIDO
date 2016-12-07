@@ -23,10 +23,12 @@ has object_work_type_id     => (fix_opt => 1);
 has object_work_type_lang   => (fix_opt => 1);
 has object_work_type_type   => (fix_opt => 1);
 has object_work_type_source => (fix_opt => 1);
+has object_work_type_pref   => (fix_opt => 1);
 has classification_id       => (fix_opt => 1);
 has classification_lang     => (fix_opt => 1);
 has classification_type     => (fix_opt => 1);
 has classification_source   => (fix_opt => 1);
+has classification_pref     => (fix_opt => 1);
 
 
 sub emit {
@@ -46,7 +48,7 @@ sub emit {
             # classification
             if (defined($self->classification)) {
                 $r_code .= emit_term($fixer, $r_root, 'classificationWrap.classification.$append',
-                            $self->classification, $self->classification_id, $self->classification_lang, 'preferred',
+                            $self->classification, $self->classification_id, $self->classification_lang, $self->classification_pref,
                             $self->classification_source, $self->classification_type);
             }
 
@@ -54,7 +56,7 @@ sub emit {
             # objectWorkType
             if (defined($self->object_work_type)) {
                 $r_code .= emit_term($fixer, $r_root, 'objectWorkTypeWrap.objectWorkType.$append',
-                            $self->object_work_type, $self->object_work_type_id, $self->object_work_type_lang, undef,
+                            $self->object_work_type, $self->object_work_type_id, $self->object_work_type_lang, $self->object_work_type_pref,
                             $self->object_work_type_source, $self->object_work_type_type);
             }
 
