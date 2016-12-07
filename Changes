@@ -2,6 +2,11 @@ Changelog for Catmandu-LIDO
 
 {{$NEXT}}
 
+  - Fixed: Using $append with lido_term causes conceptID and term to be split
+  - Fixed: missing missing prereqs as reported by CPANTS
+  - Fixed: encoding errors
+  - added: Catmandu::OAI parser handler
+
 0.05  2016-12-05 15:43:45 CET
 
   - added id_type to lido_actor
