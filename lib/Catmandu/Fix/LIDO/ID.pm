@@ -43,24 +43,33 @@ sub emit_base_id {
 		sub {
 			my $r_root = shift;
 			my $r_code = '';
+			$r_code .= $fixer->emit_create_path(
+				$r_root,
+				['$append'],
+				sub {
+					my $a_root = shift;
+					my $a_code = '';
+					$a_code .= "${a_root} = {";
 
-			$r_code .= "${r_root} = {";
+					if (defined($type)) {
+						$a_code .= "'type' => '".$type."',";
+					}
 
-			if (defined($type)) {
-				$r_code .= "'type' => '".$type."',";
-			}
+					if (defined($source)) {
+						$a_code .= "'source' => '".$source."',";
+					}
 
-			if (defined($source)) {
-				$r_code .= "'source' => '".$source."',";
-			}
+					if (defined($label)) {
+						$a_code .= "'label' => '".$label."',";
+					}
 
-			if (defined($label)) {
-				$r_code .= "'label' => '".$label."',";
-			}
+					$a_code .= "'_' => ${f_id}";
 
-			$r_code .= "'_' => ${f_id}";
+					$a_code .= "};";
 
-			$r_code .= "};";
+					return $a_code;
+				}
+			);
 
 			return $r_code;
 		}
