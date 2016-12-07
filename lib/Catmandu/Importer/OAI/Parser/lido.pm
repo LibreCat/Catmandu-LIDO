@@ -4,7 +4,7 @@ use Catmandu::Sane;
 use Moo;
 use Catmandu;
 use Catmandu::Util;
-use LIDO::XML;
+use Lido::XML;
 use JSON;
 
 with 'Catmandu::Logger';
