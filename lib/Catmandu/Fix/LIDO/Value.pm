@@ -4,7 +4,7 @@ use Catmandu::Fix::LIDO::Utility qw(walk declare_source);
 
 use strict;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 use Exporter qw(import);
 

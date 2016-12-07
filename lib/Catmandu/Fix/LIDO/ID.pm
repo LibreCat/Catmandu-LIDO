@@ -2,7 +2,7 @@ package Catmandu::Fix::LIDO::ID;
 
 use strict;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 use Exporter qw(import);
 use Data::Dumper qw(Dumper);

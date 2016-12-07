@@ -2,6 +2,8 @@ Changelog for Catmandu-LIDO
 
 {{$NEXT}}
 
+0.07  2016-12-07 17:05:07 CET
+
   - fixed: case sensitive include in OAI parser
   - Added: classification_pref & object_work_type_pref in lido_classification
   - Fixed: order of required arguments in lido_classification
