@@ -29,6 +29,16 @@ sub emit {
     my $earliest_path = ['earliestDate'];
     my $latest_path = ['latestDate'];
 
+    my $f_earliest = $fixer->generate_var();
+    my $f_earliest_type = $fixer->generate_var();
+    my $f_latest = $fixer->generate_var();
+    my $f_latest_type = $fixer->generate_var();
+
+    $perl .= "my ${f_latest};";
+    $perl .= declare_source($fixer, $self->latest_date, $f_latest);
+    $perl .= "my ${f_latest_type};";
+    $perl .= declare_source($fixer, $self->latest_date_type, $f_latest_type);
+
     ##
     # Bug #4
     if ($last eq '$append' || $last eq '$prepend' || $last eq '$last' || $last eq '$first') {
@@ -53,13 +63,63 @@ sub emit {
             # earliestDate
             # $fixer, $root, $path, $value, $lang, $pref, $label, $type, $is_string
             if (defined($self->earliest_date)) {
-                $r_code .= emit_simple_value($fixer, $r_root, join('.', @$earliest_path), $self->earliest_date, undef, undef, undef, $self->earliest_date_type);
+                $r_code .= "my ${f_earliest};";
+                $r_code .= declare_source($fixer, $self->earliest_date, $f_earliest);
+                if (defined($self->earliest_date_type)) {
+                    $r_code .= "my ${f_earliest_type};";
+                    $r_code .= declare_source($fixer, $self->earliest_date_type, $f_earliest_type);
+                }
+                $r_code .= $fixer->emit_create_path(
+                    $r_root,
+                    $earliest_path,
+                    sub {
+                        my $e_root = shift;
+                        my $e_code = '';
+
+                        $e_code .= "${e_root} = {";
+                        
+                        if (defined($self->earliest_date_type)) {
+                            $e_code .= "'type' => ${f_earliest_type},";
+                        }
+
+                        $e_code .= "'_' => ${f_earliest}";
+
+                        $e_code .= "};";
+
+                        return $e_code;
+                    }
+                );
             }
 
             ##
             # latestDate
             if (defined($self->latest_date)) {
-                $r_code .= emit_simple_value($fixer, $r_root, join('.', @$latest_path), $self->latest_date, undef, undef, undef, $self->latest_date_type);
+                $r_code .= "my ${f_latest};";
+                $r_code .= declare_source($fixer, $self->latest_date, $f_latest);
+                if (defined($self->latest_date_type)) {
+                    $r_code .= "my ${f_latest_type};";
+                    $r_code .= declare_source($fixer, $self->latest_date_type, $f_latest_type);
+                }
+                $r_code .= $fixer->emit_create_path(
+                    $r_root,
+                    $latest_path,
+                    sub {
+                        my $l_root = shift;
+                        my $l_code = '';
+
+                        $l_code .= "${l_root} = {";
+                        
+                        if (defined($self->latest_date_type)) {
+                            $l_code .= "'type' => ${f_latest_type},";
+                        }
+
+                        $l_code .= "'_' => ${f_latest}";
+
+                        $l_code .= "};";
+
+                        return $l_code;
+                    }
+                );
             }
 
             return $r_code;
