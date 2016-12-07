@@ -19,9 +19,18 @@ sub _build_lido {
 
 sub generator {
     my ($self) = @_;
+    my $file = $self->file;
+    my %opts;
+
+    if (ref($file)) {
+        %opts = ('IO' , $file);
+    }
+    else {
+        %opts = ('location' , $file);
+    }
 
     sub {
-        state $reader = XML::LibXML::Reader->new(IO => $self->file);
+        state $reader = XML::LibXML::Reader->new(%opts);
 
         my $match = $reader->nextPatternMatch(
             XML::LibXML::Pattern->new(

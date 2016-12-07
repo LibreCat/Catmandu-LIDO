@@ -7,7 +7,7 @@ on 'test', sub {
 
 requires 'Catmandu','1.0304';
 requires 'Catmandu::OAI','0.11';
-requires 'Lido::XML','0';
+requires 'Lido::XML','0.05';
 requires 'XML::LibXML','0';
 requires 'Moo';
 requires 'String::Util';
