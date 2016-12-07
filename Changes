@@ -2,6 +2,13 @@ Changelog for Catmandu-LIDO
 
 {{$NEXT}}
 
+  - fixed: case sensitive include in OAI parser
+  - Added: classification_pref & object_work_type_pref in lido_classification
+  - Fixed: order of required arguments in lido_classification
+  - added: Split lang into classification_lang and object_work_type_lang
+  - added: earliest_date_type & latest_date_type as paths
+  - fixed: lido_basedid supports $appends
+
 0.06  2016-12-07 11:58:02 CET
 
   - Fixed: Using $append with lido_term causes conceptID and term to be split
