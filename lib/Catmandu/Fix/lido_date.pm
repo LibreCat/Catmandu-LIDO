@@ -15,7 +15,9 @@ with 'Catmandu::Fix::Base';
 
 has path => (fix_arg => 1);
 has earliest_date => (fix_opt => 1);
+has earliest_date_type => (fix_opt => 1);
 has latest_date => (fix_opt => 1);
+has latest_date_type => (fix_opt => 1);
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -51,13 +53,13 @@ sub emit {
             # earliestDate
             # $fixer, $root, $path, $value, $lang, $pref, $label, $type, $is_string
             if (defined($self->earliest_date)) {
-                $r_code .= emit_simple_value($fixer, $r_root, join('.', @$earliest_path), $self->earliest_date);
+                $r_code .= emit_simple_value($fixer, $r_root, join('.', @$earliest_path), $self->earliest_date, undef, undef, undef, $self->earliest_date_type);
             }
 
             ##
             # latestDate
             if (defined($self->latest_date)) {
-                $r_code .= emit_simple_value($fixer, $r_root, join('.', @$latest_path), $self->latest_date);
+                $r_code .= emit_simple_value($fixer, $r_root, join('.', @$latest_path), $self->latest_date, undef, undef, undef, $self->latest_date_type);
             }
 
             return $r_code;
