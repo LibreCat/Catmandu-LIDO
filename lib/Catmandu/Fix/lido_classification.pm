@@ -18,6 +18,7 @@ our $VERSION = '0.06';
 with 'Catmandu::Fix::Base';
 
 has object_work_type        => (fix_arg => 1);
+has classification          => (fix_arg => 1);
 has object_work_type_id     => (fix_opt => 1);
 has object_work_type_lang   => (fix_opt => 1);
 has object_work_type_type   => (fix_opt => 1);
@@ -26,7 +27,6 @@ has classification_id       => (fix_opt => 1);
 has classification_lang     => (fix_opt => 1);
 has classification_type     => (fix_opt => 1);
 has classification_source   => (fix_opt => 1);
-has classification          => (fix_arg => 1);
 
 
 sub emit {
