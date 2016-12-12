@@ -31,7 +31,7 @@ sub emit {
 
 #$fixer, $path, $appellation_value, $appellation_value_lang,
 #$appellation_value_type, $appellation_value_pref, $source_appellation, $source_appellation_lang
-    $perl .= emit_nameset($fixer, $fixer->var, $self->path, $self->value, $self->value_lang, undef, $self->value_pref,
+    $perl .= emit_nameset($fixer, $fixer->var, $self->path, $self->value, $self->value_lang, $self->value_type, $self->value_pref,
     $self->source, $self->source_lang);
 
     return $perl;
