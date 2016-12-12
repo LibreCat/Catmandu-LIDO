@@ -20,7 +20,7 @@ sub add {
     my ($self, $data) = @_;
 
     my $xml = $self->lido->to_xml($data);
-    $self->fh->print(decode('UTF-8', $xml, Encode::FB_CROAK));
+    $self->fh->print($xml);
 }
 
 sub commit {
