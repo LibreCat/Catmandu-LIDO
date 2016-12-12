@@ -39,7 +39,7 @@ sub emit {
 
     my $paths = {};
     $paths->{'id'} = ['actor', 'actorID'];
-    $paths->{'name'} = ['actor', 'nameActorSet'];
+    $paths->{'name'} = ['actor', 'nameActorSet', '$append'];
     $paths->{'nationality'} = ['actor', 'nationalityActor'];
     $paths->{'dates'} = ['actor', 'vitalDatesActor'];
     $paths->{'role'} = ['roleActor'];

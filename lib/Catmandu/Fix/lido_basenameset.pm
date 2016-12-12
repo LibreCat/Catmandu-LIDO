@@ -20,6 +20,7 @@ has path => (fix_arg => 1);
 has value => (fix_arg => 1);
 has value_pref => (fix_opt => 1);
 has value_lang => (fix_opt => 1);
+has value_type => (fix_opt => 1);
 has source => (fix_opt => 1);
 has source_lang => (fix_opt => 1) ;
 
@@ -91,6 +92,8 @@ C<source> must be a path, all the other parameters are strings.
 
 =item C<value_lang>
 
+=item C<value_type>
+
 =item C<source_lang>
 
 =back
@@ -104,6 +107,7 @@ C<source> must be a path, all the other parameters are strings.
         recordList.record.title.value,
         -value_lang: nl,
         -value_pref: preferred,
+        -value_type: VIAF,
         -source: recordList.record.title.source,
         -source_lang: nl
     )
