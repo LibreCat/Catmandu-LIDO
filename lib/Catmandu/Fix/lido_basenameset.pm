@@ -20,7 +20,6 @@ has path => (fix_arg => 1);
 has value => (fix_arg => 1);
 has value_pref => (fix_opt => 1);
 has value_lang => (fix_opt => 1);
-has value_type => (fix_opt => 1);
 has source => (fix_opt => 1);
 has source_lang => (fix_opt => 1) ;
 
@@ -31,7 +30,8 @@ sub emit {
 
 #$fixer, $path, $appellation_value, $appellation_value_lang,
 #$appellation_value_type, $appellation_value_pref, $source_appellation, $source_appellation_lang
-    $perl .= emit_nameset($fixer, $fixer->var, $self->path, $self->value, $self->value_lang, $self->value_type, $self->value_pref,
+#$parent_type
+    $perl .= emit_nameset($fixer, $fixer->var, $self->path, $self->value, $self->value_lang, undef, $self->value_pref,
     $self->source, $self->source_lang);
 
     return $perl;
@@ -92,8 +92,6 @@ C<source> must be a path, all the other parameters are strings.
 
 =item C<value_lang>
 
-=item C<value_type>
-
 =item C<source_lang>
 
 =back
@@ -107,7 +105,6 @@ C<source> must be a path, all the other parameters are strings.
         recordList.record.title.value,
         -value_lang: nl,
         -value_pref: preferred,
-        -value_type: VIAF,
         -source: recordList.record.title.source,
         -source_lang: nl
     )
