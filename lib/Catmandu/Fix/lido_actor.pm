@@ -127,9 +127,11 @@ __END__
 =pod
 
 =head1 NAME
+
 Catmandu::Fix::lido_actor - create a LIDO actorInRole node at a specified path
 
 =head1 SYNOPSIS
+
     lido_actor(
         path,
         id,
@@ -147,6 +149,7 @@ Catmandu::Fix::lido_actor - create a LIDO actorInRole node at a specified path
     )
 
 =head1 DESCRIPTION
+
 C<lido_actor()> will create an actorInRole node in the path specified by the C<path> parameter.
 
 =head2 Parameters
