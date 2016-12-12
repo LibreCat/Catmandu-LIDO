@@ -173,6 +173,10 @@ All optional parameters are paths.
 
 =item C<latest_date>
 
+=item C<latest_date_type>
+
+=item C<earliest_date_type>
+
 =back
 
 =head1 EXAMPLE
@@ -182,7 +186,9 @@ All optional parameters are paths.
     lido_date(
         descriptiveMetadata.eventWrap.eventSet.$last.event.eventDate.date,
         -earliest_date: recordList.record.production_date_start,
-        -latest_date: recordList.record.production_date_end
+        -earliest_date_type: recordList.record.production_date_type,
+        -latest_date: recordList.record.production_date_end,
+        -latest_date_type: recordList.record.production_date_type
     )
 
 =head2 Result
