@@ -12,8 +12,6 @@ our $VERSION = '0.07';
 
 #https://librecatproject.wordpress.com/2014/03/26/create-a-fixer-part-2/
 
-use Data::Dumper qw(Dumper);
-
 with 'Catmandu::Fix::Base';
 
 has path => (fix_arg => 1);

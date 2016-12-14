@@ -4,7 +4,6 @@ use Catmandu::Sane;
 use Moo;
 use Catmandu::Fix::Has;
 use Catmandu::Fix::LIDO::Term qw(emit_term);
-use Data::Dumper qw(Dumper);
 
 use strict;
 

@@ -4,7 +4,7 @@ use Catmandu::Sane;
 use Moo;
 use Catmandu::Fix::Has;
 use Catmandu::Fix::LIDO::Value qw(emit_base_value emit_simple_value);
-use Catmandu::Fix::LIDO::Utility qw(declare_source split_path);
+use Catmandu::Fix::LIDO::Utility qw(declare_source);
 
 use strict;
 
@@ -21,7 +21,7 @@ has latest_date_type   => (fix_opt => 1);
 sub emit {
     my ($self, $fixer) = @_;
     my $perl = '';
-    my $new_path = split_path($self->path);
+    my $new_path = $fixer->split_path($self->path);
 
     my $last = pop @$new_path;
 
