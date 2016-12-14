@@ -17,11 +17,11 @@ use Data::Dumper qw(Dumper);
 
 with 'Catmandu::Fix::Base';
 
-has transcription => (fix_opt => 1);
+has transcription    => (fix_opt => 1);
 has descriptive_note => (fix_opt => 1);
-has type => (fix_opt => 1);
-has label => (fix_opt => 1);
-has lang => (fix_opt => 1);
+has type             => (fix_opt => 1);
+has label            => (fix_opt => 1);
+has lang             => (fix_opt => 1);
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -67,18 +67,18 @@ Catmandu::Fix::lido_inscription - create a C<inscriptions> node
 =head1 SYNOPSIS
 
     lido_inscription(
-        -transcription: inscriptionTranscription,
+        -transcription:    inscriptionTranscription,
         -descriptive_note: inscriptionDescription,
-        -type: inscriptionTranscription.type,
-        -label: inscriptionTranscription.label & descriptiveNote.label,
-        -lang: inscriptionDescription.lang & inscriptionTranscription.lang
+        -type:             inscriptionTranscription.type,
+        -label:            inscriptionTranscription.label & descriptiveNote.label,
+        -lang:             inscriptionDescription.lang & inscriptionTranscription.lang
     )
 
 =head1 DESCRIPTION
 
 Create a C<inscriptions> node with a transcription and a descriptive note.
 
-=head2 Parameters
+=head2 PARAMETERS
 
 =head3 Required parameters
 
@@ -108,15 +108,19 @@ All other optional parameters are strings.
 
 =back
 
+=head2 MULTIPLE INSTANCES
+
+Repeated invocations of the fix with the same path will result in a new set C<inscriptionDescription> and C<inscriptionTranscription> added to C<descriptiveMetadata.objectIdentificationWrap.inscriptionsWrap.inscriptions>. No nodes will be overwritten.
+
 =head1 EXAMPLE
 
 =head2 Fix
 
     lido_inscription(
-        -transcription: recordList.record.transcription,
+        -transcription:    recordList.record.transcription,
         -descriptive_note: recordList.record.transcription_description,
-        -label: inscription,
-        -lang: nl
+        -label:            inscription,
+        -lang:             nl
     )
 
 =head2 Result
@@ -133,3 +137,34 @@ All other optional parameters are strings.
             </lido:inscriptionsWrap>
         </lido:objectIdentificationWrap>
       </lido:descriptiveMetadata>
+      
+=head1 SEE ALSO
+
+L<Catmandu::LIDO> and L<Catmandu>
+
+=head1 AUTHORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=back
+
+=head1 CONTRIBUTORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=item Matthias Vandermaesen, C<< matthias.vandermaesen at vlaamsekunstcollectie.be >>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+The Perl software is copyright (c) 2016 by PACKED vzw and VKC vzw.
+This is free software; you can redistribute it and/or modify it under the same terms as the Perl 5 programming language system itself.
+
+=encoding utf8
+
+=cut

@@ -1,7 +1,5 @@
 package Catmandu::Fix::lido_classification;
 
-use Data::Dumper qw(Dumper);
-
 use Catmandu::Sane;
 use Moo;
 use Catmandu::Fix::Has;
@@ -98,7 +96,7 @@ Catmandu::Fix::lido_classification - create an C<objectClassificationWrap>.
 
 C<lido_classification> will create a C<objectClassificationWrap> containing both the C<classificationWrap.classification> and the C<objectWorkTypeWrap.objectWorkType>.
 
-=head2 Parameters
+=head2 PARAMETERS
 
 =head3 Required parameters
 
@@ -151,16 +149,16 @@ C<object_work_type_id> and C<classification_id> are optional path parameters. Al
     lido_classification (
         recordList.record.object_name.value,
         recordList.record.object_cat.value,
-        -object_work_type_id: recordList.record.object_name.id,
-        -object_work_type_lang: nl,
-        -object_work_type_type: local,
+        -object_work_type_id:     recordList.record.object_name.id,
+        -object_work_type_lang:   nl,
+        -object_work_type_type:   local,
         -object_work_type_source: Adlib,
-        -object_work_type_pref: preferred,
-        -classification_id: recordList.record.object_cat.id,
-        -classification_lang: nl,
-        -classification_type: local,
-        -classification_source: Adlib,
-        -classification_pref: preferred
+        -object_work_type_pref:   preferred,
+        -classification_id:       recordList.record.object_cat.id,
+        -classification_lang:     nl,
+        -classification_type:     local,
+        -classification_source:   Adlib,
+        -classification_pref:     preferred
     )
 
 =head2 Result

@@ -17,9 +17,9 @@ use Data::Dumper qw(Dumper);
 with 'Catmandu::Fix::Base';
 
 has extent => (fix_arg => 1); # should this be a path?
-has type => (fix_arg => 1);
-has unit => (fix_arg => 1);
-has value => (fix_arg => 1); # path
+has type   => (fix_arg => 1);
+has unit   => (fix_arg => 1);
+has value  => (fix_arg => 1); # path
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -115,7 +115,7 @@ Catmandu::Fix::lido_objectmeasurements - Create a C<objectMeasurements> node
 
 Create a C<objectMeasurements> node, consisting of C<measurementType>, C<measurementUnit>, C<measurementValue> and C<extentMeasurements>.
 
-=head2 Parameters
+=head2 PARAMETERS
 
 =head3 Required parameters
 
@@ -138,6 +138,10 @@ C<value>, C<type> and C<unit> are path parameters, all other parameters are stri
 =item C<extent>
 
 =back
+
+=head2 MULTIPLE INSTANCES
+
+Repeated invocations of the fix with the same path will result in a new C<objectMeasurementsSet> at C<descriptiveMetadata.objectIdentificationWrap.objectMeasurementsWrap>. No nodes will be overwritten.
 
 =head1 EXAMPLE
 
@@ -168,3 +172,34 @@ C<value>, C<type> and C<unit> are path parameters, all other parameters are stri
             </lido:objectMeasurementsWrap>
         </lido:objectIdentificationWrap>
     </lido:descriptiveMetadata>
+
+=head1 SEE ALSO
+
+L<Catmandu::LIDO> and L<Catmandu>
+
+=head1 AUTHORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=back
+
+=head1 CONTRIBUTORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=item Matthias Vandermaesen, C<< matthias.vandermaesen at vlaamsekunstcollectie.be >>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+The Perl software is copyright (c) 2016 by PACKED vzw and VKC vzw.
+This is free software; you can redistribute it and/or modify it under the same terms as the Perl 5 programming language system itself.
+
+=encoding utf8
+
+=cut

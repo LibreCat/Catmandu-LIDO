@@ -4,8 +4,6 @@ use strict;
 
 our $VERSION = '0.07';
 
-use Data::Dumper qw(Dumper);
-
 use Exporter qw(import);
 use String::Util qw(trim);
 

@@ -49,17 +49,17 @@ Catmandu::Fix::lido_term - create a C<term> and C<conceptID> node in a C<path>
         path,
         term,
         -conceptid: conceptID,
-        -lang: term.lang,
-        -pref: term.pref,
-        -source: conceptID.source,
-        -type: conceptID.type
+        -lang:      term.lang,
+        -pref:      term.pref,
+        -source:    conceptID.source,
+        -type:      conceptID.type
     )
 
 =head1 DESCRIPTION
 
 Create a node consisting of a C<term> and a C<conceptID> in a C<path>.
 
-=head2 Parameters
+=head2 PARAMETERS
 
 =head3 Required parameters
 
@@ -97,6 +97,14 @@ All other optional parameters are strings.
 
 =back
 
+=head2 MULTIPLE INSTANCES
+
+Multiple instances can be created in two ways, depending on whether you want to repeat the parent element or not.
+
+If you do not want to repeat the parent element, call the fixn multiple times with the same C<path>. Multiple C<term> and C<conceptID> tags will be created on the same level.
+
+If you do want to repeat the parent element (to keep related C<term> and C<conceptID> together), add an C<$append> to your path.
+
 =head1 EXAMPLE
 
 =head2 Fix
@@ -106,7 +114,7 @@ All other optional parameters are strings.
         recordList.record.category.value,
         -conceptid: recordList.record.category.id,
         -type: global,
-        -source: 'cidoc-crm',
+        -source: 'cidoc-crm'
     )
 
 =head2 Result
@@ -115,3 +123,34 @@ All other optional parameters are strings.
         <lido:conceptID lido:type="global" lido:source="cidoc-crm">123</lido:conceptID>
         <lido:term>Paintings</lido:term>
     </lido:category>
+
+=head1 SEE ALSO
+
+L<Catmandu::LIDO> and L<Catmandu>
+
+=head1 AUTHORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=back
+
+=head1 CONTRIBUTORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=item Matthias Vandermaesen, C<< matthias.vandermaesen at vlaamsekunstcollectie.be >>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+The Perl software is copyright (c) 2016 by PACKED vzw and VKC vzw.
+This is free software; you can redistribute it and/or modify it under the same terms as the Perl 5 programming language system itself.
+
+=encoding utf8
+
+=cut

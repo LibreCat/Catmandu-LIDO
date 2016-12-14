@@ -49,10 +49,10 @@ Catmandu::Fix::lido_basevalue - Create a basic XML node in a C<path>
     lido_basevalue(
         path,
         value,
-        -pref: node.pref,
-        -lang: node.lang,
+        -pref:  node.pref,
+        -lang:  node.lang,
         -label: node.label,
-        -type: node.type
+        -type:  node.type
     )
 
 =head1 DESCRIPTION
@@ -109,3 +109,34 @@ All optional parameters are strings.
             </lido:subjectWrap>
         </lido:objectRelationWrap>
     </lido:descriptiveMetadata>
+
+=head1 SEE ALSO
+
+L<Catmandu::LIDO> and L<Catmandu>
+
+=head1 AUTHORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=back
+
+=head1 CONTRIBUTORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=item Matthias Vandermaesen, C<< matthias.vandermaesen at vlaamsekunstcollectie.be >>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+The Perl software is copyright (c) 2016 by PACKED vzw and VKC vzw.
+This is free software; you can redistribute it and/or modify it under the same terms as the Perl 5 programming language system itself.
+
+=encoding utf8
+
+=cut

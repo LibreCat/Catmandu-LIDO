@@ -5,7 +5,6 @@ use Moo;
 use Catmandu::Fix::Has;
 use Catmandu::Fix::LIDO::Value qw(emit_base_value emit_simple_value);
 use Catmandu::Fix::LIDO::Utility qw(declare_source split_path);
-use Data::Dumper qw(Dumper);
 
 use strict;
 
@@ -13,11 +12,11 @@ our $VERSION = '0.07';
 
 with 'Catmandu::Fix::Base';
 
-has path => (fix_arg => 1);
-has earliest_date => (fix_opt => 1);
+has path               => (fix_arg => 1);
+has earliest_date      => (fix_opt => 1);
 has earliest_date_type => (fix_opt => 1);
-has latest_date => (fix_opt => 1);
-has latest_date_type => (fix_opt => 1);
+has latest_date        => (fix_opt => 1);
+has latest_date_type   => (fix_opt => 1);
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -143,15 +142,17 @@ Catmandu::Fix::lido_date - create a generic date component in C<path>
 
     lido_date(
         path,
-        -earliest_date: earliestDate,
-        -latest_date: latestDate
+        -earliest_date:      earliestDate,
+        -earliest_date_type: earliestDate.type,
+        -latest_date:        latestDate,
+        -latest_date_type:   latestDate.type
     )
 
 =head1 DESCRIPTION
 
 Creates a generic date component consisting of C<latestDate> and C<earliestDate> in a C<path>.
 
-=head2 Parameters
+=head2 PARAMETERS
 
 =head3 Required parameters
 
@@ -185,10 +186,10 @@ All optional parameters are paths.
 
     lido_date(
         descriptiveMetadata.eventWrap.eventSet.$last.event.eventDate.date,
-        -earliest_date: recordList.record.production_date_start,
+        -earliest_date:      recordList.record.production_date_start,
         -earliest_date_type: recordList.record.production_date_type,
-        -latest_date: recordList.record.production_date_end,
-        -latest_date_type: recordList.record.production_date_type
+        -latest_date:        recordList.record.production_date_end,
+        -latest_date_type:   recordList.record.production_date_type
     )
 
 =head2 Result
@@ -199,11 +200,42 @@ All optional parameters are paths.
                 <lido:event>
                     <lido:eventDate>
                         <lido:date>
-                            <lido:earliestDate>1812</lido:earliestDate>
-                            <lido:latestDate>1813</lido:latestDate>
+                            <lido:earliestDate lido:type="circa">1812</lido:earliestDate>
+                            <lido:latestDate lido:type="circa">1813</lido:latestDate>
                         </lido:date>
                     </lido:eventDate>
                 </lido:event>
             </lido:eventSet>
         </lido:eventWrap>
     </lido:descriptiveMetadata>
+
+=head1 SEE ALSO
+
+L<Catmandu::LIDO> and L<Catmandu>
+
+=head1 AUTHORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=back
+
+=head1 CONTRIBUTORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=item Matthias Vandermaesen, C<< matthias.vandermaesen at vlaamsekunstcollectie.be >>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+The Perl software is copyright (c) 2016 by PACKED vzw and VKC vzw.
+This is free software; you can redistribute it and/or modify it under the same terms as the Perl 5 programming language system itself.
+
+=encoding utf8
+
+=cut

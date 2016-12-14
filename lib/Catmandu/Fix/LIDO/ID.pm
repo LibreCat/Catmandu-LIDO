@@ -5,7 +5,6 @@ use strict;
 our $VERSION = '0.07';
 
 use Exporter qw(import);
-use Data::Dumper qw(Dumper);
 
 use Catmandu::Fix::LIDO::Utility qw(walk declare_source);
 

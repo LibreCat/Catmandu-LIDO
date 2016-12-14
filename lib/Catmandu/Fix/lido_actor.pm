@@ -7,7 +7,6 @@ use Catmandu::Fix::LIDO::Term qw(emit_term);
 use Catmandu::Fix::LIDO::ID qw(emit_base_id);
 use Catmandu::Fix::LIDO::Nameset qw(emit_nameset);
 use Catmandu::Fix::LIDO::Value qw(emit_base_value emit_simple_value);
-use Data::Dumper qw(Dumper);
 
 use strict;
 
@@ -15,22 +14,22 @@ our $VERSION = '0.07';
 
 with 'Catmandu::Fix::Base';
 
-has path => (fix_arg => 1);
-has id => (fix_arg => 1);
-has name => (fix_arg => 1);
-has name_lang => (fix_opt => 1);
-has name_pref => (fix_opt => 1);
-has id_label => (fix_opt => 1);
-has id_source => (fix_opt => 1);
-has id_type => (fix_opt => 1);
-has nationality => (fix_opt => 1); # Path
-has birthdate => (fix_opt => 1);
-has deathdate => (fix_opt => 1);
-has role => (fix_opt => 1);
-has role_id => (fix_opt => 1);
-has role_id_type => (fix_opt => 1);
-has role_id_source => (fix_opt => 1);
-has qualifier => (fix_opt => 1);
+has path            => (fix_arg => 1);
+has id              => (fix_arg => 1);
+has name            => (fix_arg => 1);
+has name_lang       => (fix_opt => 1);
+has name_pref       => (fix_opt => 1);
+has id_label        => (fix_opt => 1);
+has id_source       => (fix_opt => 1);
+has id_type         => (fix_opt => 1);
+has nationality     => (fix_opt => 1); # Path
+has birthdate       => (fix_opt => 1);
+has deathdate       => (fix_opt => 1);
+has role            => (fix_opt => 1);
+has role_id         => (fix_opt => 1);
+has role_id_type    => (fix_opt => 1);
+has role_id_source  => (fix_opt => 1);
+has qualifier       => (fix_opt => 1);
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -136,23 +135,26 @@ Catmandu::Fix::lido_actor - create a LIDO actorInRole node at a specified path
         path,
         id,
         name,
-        -id_label: actorID.label,
-        -id_source: actorID.source,
-        -nationality: nationalityActor,
-        -birthdate: vitalDatesActor.earliestDate,
-        -deathdate: vitalDatesActor.latestDate,
-        -role: roleActor.term,
-        -role_id: roleActor.conceptID,
-        -role_id_type: roleActor.conceptID.type,
+        -name_lang:      name.lang,
+        -name_pref:      name.pref,
+        -id_label:       actorID.label,
+        -id_source:      actorID.source,
+        -id_type:        actorID.type,
+        -nationality:    nationalityActor,
+        -birthdate:      vitalDatesActor.earliestDate,
+        -deathdate:      vitalDatesActor.latestDate,
+        -role:           roleActor.term,
+        -role_id:        roleActor.conceptID,
+        -role_id_type:   roleActor.conceptID.type,
         -role_id_source: roleActor.conceptID.source,
-        -qualifier: attributionQualifierActor
+        -qualifier:      attributionQualifierActor
     )
 
 =head1 DESCRIPTION
 
 C<lido_actor()> will create an actorInRole node in the path specified by the C<path> parameter.
 
-=head2 Parameters
+=head2 PARAMETERS
 
 =head3 Required parameters
 
@@ -204,6 +206,10 @@ All other optional parameters are strings:
 
 =back
 
+=head2 MULTIPLE INSTANCES
+
+Multiple instances can be created by appending C<$append> to the path. This will create a new C<actorInRole> tag for every instance. While it is possible to create a single C<actorInRole> for multiple actors, this is not permitted by the LIDO standard.
+
 =head1 EXAMPLE
 
 =head2 Fix
@@ -214,12 +220,14 @@ All other optional parameters are strings:
         recordList.record.creator.name,
         -id_label: 'priref',
         -id_type: 'local',
+        -id_source: 'Adlib'
         -nationality: recordList.record.creator.nationality,
         -birthdate: recordList.record.creator.date_of_birth,
         -deathdate: recordList.record.creator.date_of_death,
         -role: recordList.record.role.name,
         -role_id: recordList.record.role.id,
-        -role_id_type: 'aat',
+        -role_id_type: 'global',
+        -role_id_source: 'AAT',
         -qualifier: recordList.record.role.name
     )
 
@@ -232,7 +240,7 @@ All other optional parameters are strings:
                     <lido:eventActor>
                         <lido:actorInRole>
                             <lido:actor>
-                                <lido:actorID lido:label="priref" lido:type="local">123</lido:actorID>
+                                <lido:actorID lido:label="priref" lido:type="local" lido:source="Adlib">123</lido:actorID>
                                 <lido:nameActorSet>
                                     <lido:appellationValue>Jonghe, Jan Baptiste De</lido:appellationValue>
                                 </lido:nameActorSet>
@@ -245,7 +253,7 @@ All other optional parameters are strings:
                                 </lido:vitalDatesActor>
                             </lido:actor>
                             <lido:roleActor>
-                                <lido:conceptID lido:type="aat">123</lido:conceptID>
+                                <lido:conceptID lido:type="global" lido:source="AAT">123</lido:conceptID>
                                 <lido:term>Creator</lido:term>
                             </lido:roleActor>
                             <lido:attributionQualifierActor>Created</lido:attributionQualifierActor>
@@ -255,3 +263,34 @@ All other optional parameters are strings:
             </lido:eventSet>
         </lido:eventWrap>
     </lido:descriptiveMetadata>
+
+=head1 SEE ALSO
+
+L<Catmandu::LIDO> and L<Catmandu>
+
+=head1 AUTHORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=back
+
+=head1 CONTRIBUTORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=item Matthias Vandermaesen, C<< matthias.vandermaesen at vlaamsekunstcollectie.be >>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+The Perl software is copyright (c) 2016 by PACKED vzw and VKC vzw.
+This is free software; you can redistribute it and/or modify it under the same terms as the Perl 5 programming language system itself.
+
+=encoding utf8
+
+=cut

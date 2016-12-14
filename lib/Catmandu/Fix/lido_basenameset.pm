@@ -10,18 +10,15 @@ use strict;
 
 our $VERSION = '0.07';
 
-#https://librecatproject.wordpress.com/2014/03/26/create-a-fixer-part-2/
-
-use Data::Dumper qw(Dumper);
 
 with 'Catmandu::Fix::Base';
 
-has path => (fix_arg => 1);
-has value => (fix_arg => 1);
-has value_pref => (fix_opt => 1);
-has value_lang => (fix_opt => 1);
-has source => (fix_opt => 1);
-has source_lang => (fix_opt => 1) ;
+has path        => (fix_arg => 1);
+has value       => (fix_arg => 1);
+has value_pref  => (fix_opt => 1);
+has value_lang  => (fix_opt => 1);
+has source      => (fix_opt => 1);
+has source_lang => (fix_opt => 1);
 
 sub emit {
     my ($self, $fixer) = @_;
@@ -52,9 +49,9 @@ Catmandu::Fix::lido_basenameset - Create a basic nameset in a C<path>
     lido_basenameset (
         path,
         value,
-        -value_pref: appellationValue.pref,
-        -value_lang: appellationValue.lang,
-        -source: sourceAppellation,
+        -value_pref:  appellationValue.pref,
+        -value_lang:  appellationValue.lang,
+        -source:      sourceAppellation,
         -source_lang: sourceAppellation.lang
     )
 
@@ -62,7 +59,7 @@ Catmandu::Fix::lido_basenameset - Create a basic nameset in a C<path>
 
 C<lido_basenameset> creates a basic LIDO node that contains both C<appellationValue> and C<sourceAppellation> at a specified C<path>.
 
-=head2 Parameters
+=head2 PARAMETERS
 
 =head3 Required parameters
 
@@ -96,6 +93,14 @@ C<source> must be a path, all the other parameters are strings.
 
 =back
 
+=head2 MULTIPLE INSTANCES
+
+Multiple instances can be created in two ways, depending on whether you want to repeat the parent element or not.
+
+If you do not want to repeat the parent element, call the function multiple times with the same C<path>. Multiple C<appellationValue> and C<sourceAppellation> tags will be created on the same level.
+
+If you do want to repeat the parent element (to keep related C<appellationValue> and C<sourceAppellation> together), add an C<$append> to your path for all calls.
+
 =head1 EXAMPLE
 
 =head2 Fix
@@ -103,9 +108,9 @@ C<source> must be a path, all the other parameters are strings.
     lido_basenameset(
         descriptiveMetadata.objectIdentificationWrap.titleWrap.titleSet,
         recordList.record.title.value,
-        -value_lang: nl,
-        -value_pref: preferred,
-        -source: recordList.record.title.source,
+        -value_lang:  nl,
+        -value_pref:  preferred,
+        -source:      recordList.record.title.source,
         -source_lang: nl
     )
 
@@ -121,3 +126,34 @@ C<source> must be a path, all the other parameters are strings.
             </lido:titleWrap>
         </lido:objectIdentificationWrap>
     </lido:descriptiveMetadata>
+
+=head1 SEE ALSO
+
+L<Catmandu::LIDO> and L<Catmandu>
+
+=head1 AUTHORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=back
+
+=head1 CONTRIBUTORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=item Matthias Vandermaesen, C<< matthias.vandermaesen at vlaamsekunstcollectie.be >>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+The Perl software is copyright (c) 2016 by PACKED vzw and VKC vzw.
+This is free software; you can redistribute it and/or modify it under the same terms as the Perl 5 programming language system itself.
+
+=encoding utf8
+
+=cut
