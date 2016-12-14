@@ -192,3 +192,34 @@ C<emit_value> and C<emit_simple_value> have the same calling syntax.
 C<emit_value> and C<emit_simple_value> will generate the necessary emit code to generate a node in a given path. The node is attached directly to the path, so you must specify the name of the node (e.g. category) in the $path.
 
 Use C<emit_value> when the node is repeatable and C<emit_simple_value> when it isn't.
+
+=head1 SEE ALSO
+
+L<Catmandu::LIDO> and L<Catmandu>
+
+=head1 AUTHORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=back
+
+=head1 CONTRIBUTORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=item Matthias Vandermaesen, C<< matthias.vandermaesen at vlaamsekunstcollectie.be >>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+The Perl software is copyright (c) 2016 by PACKED vzw and VKC vzw.
+This is free software; you can redistribute it and/or modify it under the same terms as the Perl 5 programming language system itself.
+
+=encoding utf8
+
+=cut

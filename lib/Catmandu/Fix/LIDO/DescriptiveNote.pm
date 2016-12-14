@@ -100,3 +100,37 @@ Catmandu::Fix::LIDO::DescriptiveNote::emit_descriptive_note
 
 This function will generate the necessary emit code to generate a C<descriptiveNoteValue> in a given path.
 
+=head2 MULTIPLE INSTANCES
+
+To add multiple C<descriptiveNoteValue>'s at the same location (e.g. C<descriptiveMetadata.objectDescriptionWrap.objectDescriptionSet>), simply call the function multiple times with the same path. A new parent (e.g. C<objectDescriptionSet>) will be created for every new C<descriptiveNoteValue>, per the standard.
+
+=head1 SEE ALSO
+
+L<Catmandu::LIDO> and L<Catmandu>
+
+=head1 AUTHORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=back
+
+=head1 CONTRIBUTORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=item Matthias Vandermaesen, C<< matthias.vandermaesen at vlaamsekunstcollectie.be >>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+The Perl software is copyright (c) 2016 by PACKED vzw and VKC vzw.
+This is free software; you can redistribute it and/or modify it under the same terms as the Perl 5 programming language system itself.
+
+=encoding utf8
+
+=cut

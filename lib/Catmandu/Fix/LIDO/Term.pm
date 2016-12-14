@@ -179,3 +179,42 @@ Catmandu::Fix::LIDO::Term::emit_term
 =head1 DESCRIPTION
 
 This function will generate the necessary emit code to generate a C<term> node in a given path consisting of C<term> and C<conceptID>. The node is attached directly to the path, so you must specify the name of the term (e.g. category) in the $path.
+
+=head2 MULTIPLE INSTANCES
+
+Multiple instances can be created in two ways, depending on whether you want to repeat the parent element or not.
+
+If you do not want to repeat the parent element, call the function multiple times with the same C<path>. Multiple C<term> and C<conceptID> tags will be created on the same level.
+
+If you do want to repeat the parent element (to keep related C<term> and C<conceptID> together), add an C<$append> to your path for all calls.
+
+=head1 SEE ALSO
+
+L<Catmandu::LIDO> and L<Catmandu>
+
+=head1 AUTHORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=back
+
+=head1 CONTRIBUTORS
+
+=over
+
+=item Pieter De Praetere, C<< pieter at packed.be >>
+
+=item Matthias Vandermaesen, C<< matthias.vandermaesen at vlaamsekunstcollectie.be >>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+The Perl software is copyright (c) 2016 by PACKED vzw and VKC vzw.
+This is free software; you can redistribute it and/or modify it under the same terms as the Perl 5 programming language system itself.
+
+=encoding utf8
+
+=cut

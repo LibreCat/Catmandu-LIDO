@@ -144,7 +144,7 @@ C<value>, C<type> and C<unit> are path parameters, all other parameters are stri
 =head2 Fix
 
     lido_objectmeasurements(
-        'hoogte',
+        'Volledig',
         recordList.record.height.type,
         recordList.record.height.unit,
         recordList.record.height
@@ -162,7 +162,7 @@ C<value>, C<type> and C<unit> are path parameters, all other parameters are stri
                             <lido:measurementUnit>cm</lido:measurementUnit>
                             <lido:measurementValue>15</lido:measurementValue>
                         </lido:measurementsSet>
-                        <lido:extentMeasurements>hoogte</lido:extentMeasurements>
+                        <lido:extentMeasurements>Volledig</lido:extentMeasurements>
                     </lido:objectMeasurements>
                 </lido:objectMeasurementsSet>
             </lido:objectMeasurementsWrap>
