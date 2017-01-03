@@ -1,5 +1,5 @@
 # NAME
-[![Build Status](https://travis-ci.org/librecat/Catmandu-LIDO.svg?branch=master)](https://travis-ci.org/librecat/Catmandu-LIDO)
+[![Build Status](https://travis-ci.org/LibreCat/Catmandu-LIDO.svg?branch=master)](https://travis-ci.org/LibreCat/Catmandu-LIDO)
 
 Catmandu::LIDO - Modules for handling LIDO data within the Catmandu framework
 
