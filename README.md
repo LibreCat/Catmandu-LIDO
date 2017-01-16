@@ -1,5 +1,4 @@
 # NAME
-[![Build Status](https://travis-ci.org/LibreCat/Catmandu-LIDO.svg?branch=master)](https://travis-ci.org/LibreCat/Catmandu-LIDO)
 
 Catmandu::LIDO - Modules for handling LIDO data within the Catmandu framework
 
@@ -7,13 +6,9 @@ Catmandu::LIDO - Modules for handling LIDO data within the Catmandu framework
 
 Command line client `catmandu`:
 
-```
     catmandu convert LIDO to JSON --fix lido.fix < data/lido.xml > data/lido.json
-```
 
-```
     catmandu convert JSON to LIDO --fix lido.fix < data/lido.json > data/lido.xml
-````
 
 See documentation of modules for more examples.
 

@@ -8,7 +8,7 @@ use Catmandu::Fix::LIDO::Utility qw(declare_source);
 
 use strict;
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 with 'Catmandu::Fix::Base';
 

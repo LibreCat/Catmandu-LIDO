@@ -2,7 +2,7 @@ package Catmandu::Exporter::LIDO;
 
 use Catmandu::Sane;
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 use Moo;
 use Encode;

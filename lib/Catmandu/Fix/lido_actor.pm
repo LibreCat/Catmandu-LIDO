@@ -10,7 +10,7 @@ use Catmandu::Fix::LIDO::Value qw(emit_base_value emit_simple_value);
 
 use strict;
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 with 'Catmandu::Fix::Base';
 

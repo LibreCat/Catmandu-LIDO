@@ -2,7 +2,7 @@ package Catmandu::Fix::LIDO::Utility;
 
 use strict;
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 use Exporter qw(import);
 use String::Util qw(trim);
