@@ -14,3 +14,9 @@ local
 .perl-version
 cpanfile.snapshot
 demo.pl
+*.sqlite
+*.fix
+*.xml
+*.json
+msk.pl
+msk.fix 2
