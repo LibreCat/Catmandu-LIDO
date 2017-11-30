@@ -33,11 +33,6 @@ sub emit {
     my $f_latest = $fixer->generate_var();
     my $f_latest_type = $fixer->generate_var();
 
-    $perl .= "my ${f_latest};";
-    $perl .= declare_source($fixer, $self->latest_date, $f_latest);
-    $perl .= "my ${f_latest_type};";
-    $perl .= declare_source($fixer, $self->latest_date_type, $f_latest_type);
-
     ##
     # Bug #4
     if ($last eq '$append' || $last eq '$prepend' || $last eq '$last' || $last eq '$first') {
