@@ -20,3 +20,4 @@ demo.pl
 *.json
 msk.pl
 msk.fix 2
+_build_params
