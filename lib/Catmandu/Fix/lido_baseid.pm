@@ -72,7 +72,7 @@ The parameters C<path> and C<id_value> are mandatory paths.
 
 =head3 Optional parameters
 
-All optional parametes are strings.
+All optional parameters are strings.
 
 =over
 
